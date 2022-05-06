@@ -1,3 +1,6 @@
+import copy
+import time
+
 class Parameter: 
     variable_count = 1
     def __init__ (self, name=None): 
@@ -8,15 +11,15 @@ class Parameter:
             self.type = "Variable"
             self.name = "v" + str(Parameter.variable_count)
             Parameter.variable_count += 1
-def isConstant(self):
-    return self.type == "Constant"
-def unify(self, type_, name): 
-    self.type = type_ 
-    self.name = name
-def __eq__ (self, other):
-    return self.name == other.name
-def __str__ (self): 
-    return self.name
+    def isConstant(self):
+        return self.type == "Constant"
+    def unify(self, type_, name): 
+        self.type = type_ 
+        self.name = name
+    def __eq__ (self, other):
+        return self.name == other.name
+    def __str__ (self): 
+        return self.name
  
 
 
@@ -210,7 +213,7 @@ def printOutput(filename, results):
         for line in results:
             file.write(line) 
             file.write("\n")
-            file.close()
+    file.close()
 if __name__== '__main__':
     inputQueries_, inputSentences_ = getInput('input_1.txt') 
     knowledgeBase = KB(inputSentences_) 
