@@ -1,0 +1,29 @@
+Write a PL/Sql cursor to extract the details of a student and print the grades according to the marks scored.
+
+create table student(name varchar(10), marks number);
+insert into student values('Goku', 0);
+insert into student values('Bakugo',100);
+insert into student values('Yamcha',65);
+insert into student values('Vegeta',81);
+insert into student values('Karma',99);
+
+select * from student;
+declare
+    cursor grade is select * from student;
+    name student.name%type;
+    marks student.marks%type;
+begin
+    open grade;
+    loop
+        fetch grade into name, marks;
+        exit when grade%notfound;
+        if (marks > 90) then dbms_output.put_line(name||' '||marks||' '||'A');
+        elsif (marks between 80 and 90) then dbms_output.put_line(name||' '||marks||' '||'B'); 
+        elsif (marks between 70 and 80) then dbms_output.put_line(name||' '||marks||' '||'C');
+        elsif (marks between 60 and 70) then dbms_output.put_line(name||' '||marks||' '||'D');
+        elsif (marks between 50 and 60) then dbms_output.put_line(name||' '||marks||' '||'E');
+        elsif (marks < 50 ) then dbms_output.put_line(name||' '||marks||' '||'Fail');
+        end if;
+    end loop;
+    close grade;
+end;

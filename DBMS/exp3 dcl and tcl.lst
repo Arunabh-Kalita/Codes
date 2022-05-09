@@ -1,0 +1,123 @@
+SQL> create table student(reg number primary key, name varchar(15), dob date, marks number);
+
+Table created.
+
+SQL> 
+SQL> insert into student values(100, 'Abhay', date '2001-11-25', 90);
+
+1 row created.
+
+SQL> insert into student values(102, 'Ajay', date '2000-02-20', 97);
+
+1 row created.
+
+SQL> insert into student values(103, 'Rishi', date '1999-08-02', 66);
+
+1 row created.
+
+SQL> insert into student values(104, 'Bishal', date '2002-12-09', 83);
+
+1 row created.
+
+SQL> select * from student;
+
+       REG NAME            DOB            MARKS                                 
+---------- --------------- --------- ----------                                 
+       100 Abhay           25-NOV-01         90                                 
+       102 Ajay            20-FEB-00         97                                 
+       103 Rishi           02-AUG-99         66                                 
+       104 Bishal          09-DEC-02         83                                 
+
+SQL> grant select on student to public;
+
+Grant succeeded.
+
+SQL> revoke select on student from public;
+
+Revoke succeeded.
+
+SQL> insert into student values(105, 'Akansha', date '2001-05-19', 83);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from student;
+
+       REG NAME            DOB            MARKS                                 
+---------- --------------- --------- ----------                                 
+       100 Abhay           25-NOV-01         90                                 
+       102 Ajay            20-FEB-00         97                                 
+       103 Rishi           02-AUG-99         66                                 
+       104 Bishal          09-DEC-02         83                                 
+       105 Akansha         19-MAY-01         83                                 
+
+SQL> delete from student where reg=102;
+
+1 row deleted.
+
+SQL> select * from student;
+
+       REG NAME            DOB            MARKS                                 
+---------- --------------- --------- ----------                                 
+       100 Abhay           25-NOV-01         90                                 
+       103 Rishi           02-AUG-99         66                                 
+       104 Bishal          09-DEC-02         83                                 
+       105 Akansha         19-MAY-01         83                                 
+
+SQL> 
+SQL> 
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from student;
+
+       REG NAME            DOB            MARKS                                 
+---------- --------------- --------- ----------                                 
+       100 Abhay           25-NOV-01         90                                 
+       102 Ajay            20-FEB-00         97                                 
+       103 Rishi           02-AUG-99         66                                 
+       104 Bishal          09-DEC-02         83                                 
+       105 Akansha         19-MAY-01         83                                 
+
+SQL> 
+SQL> 
+SQL> savepoint sp;
+
+Savepoint created.
+
+SQL> delete from student where reg=104;
+
+1 row deleted.
+
+SQL> savepoint sp2;
+
+Savepoint created.
+
+SQL> select * from student;
+
+       REG NAME            DOB            MARKS                                 
+---------- --------------- --------- ----------                                 
+       100 Abhay           25-NOV-01         90                                 
+       102 Ajay            20-FEB-00         97                                 
+       103 Rishi           02-AUG-99         66                                 
+       105 Akansha         19-MAY-01         83                                 
+
+SQL> rollback to sp;
+
+Rollback complete.
+
+SQL> select * from student;
+
+       REG NAME            DOB            MARKS                                 
+---------- --------------- --------- ----------                                 
+       100 Abhay           25-NOV-01         90                                 
+       102 Ajay            20-FEB-00         97                                 
+       103 Rishi           02-AUG-99         66                                 
+       104 Bishal          09-DEC-02         83                                 
+       105 Akansha         19-MAY-01         83                                 
+
+SQL> spool off;

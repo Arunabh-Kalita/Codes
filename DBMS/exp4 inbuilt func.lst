@@ -1,0 +1,283 @@
+SQL> select ascii('A') As Value from dual;
+
+     VALUE                                                                      
+----------                                                                      
+        65                                                                      
+
+SQL> select ascii('c') As Value from dual;
+
+     VALUE                                                                      
+----------                                                                      
+        99                                                                      
+
+SQL> select ascii('\n') As Value from dual;
+
+     VALUE                                                                      
+----------                                                                      
+        92                                                                      
+
+SQL> select chr(65), chr(99), chr(92) from dual;
+
+C C C                                                                           
+- - -                                                                           
+A c \                                                                           
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> select concat('name','reg')Reg_name from student;
+
+REG_NAM                                                                         
+-------                                                                         
+namereg                                                                         
+namereg                                                                         
+namereg                                                                         
+namereg                                                                         
+namereg                                                                         
+
+SQL> 
+SQL> 
+SQL> select initcap('abc def ghi jkl') from dual;
+
+INITCAP('ABCDEF                                                                 
+---------------                                                                 
+Abc Def Ghi Jkl                                                                 
+
+SQL> 
+SQL> 
+SQL> select instr('pneumonoultramicroscopicsilicovolcanoconiosis','micro') as POS1 from dual;
+
+      POS1                                                                      
+----------                                                                      
+        14                                                                      
+
+SQL> select instr('pneumonoultramicroscopicsilicovolcanoconiosis','co',1,2) as POS1 from dual;
+
+      POS1                                                                      
+----------                                                                      
+        29                                                                      
+
+SQL> select instr('pneumonoultramicroscopicsilicovolcanoconiosis','i',-1,3) as POS3 from dual;
+
+      POS3                                                                      
+----------                                                                      
+        28                                                                      
+
+SQL> 
+SQL> 
+SQL> 
+SQL> select length('pneumonoultramicroscopicsilicovolcanoconiosis') as Len from dual;
+
+       LEN                                                                      
+----------                                                                      
+        45                                                                      
+
+SQL> 
+SQL> 
+SQL> 
+SQL> select lower('HELLO') from dual;
+
+LOWER                                                                           
+-----                                                                           
+hello                                                                           
+
+SQL> select upper('hello') from dual;
+
+UPPER                                                                           
+-----                                                                           
+HELLO                                                                           
+
+SQL> 
+SQL> 
+SQL> select lpad('Oracle',10,'.') lpad from dual;
+
+LPAD                                                                            
+----------                                                                      
+....Oracle                                                                      
+
+SQL> select rpad('Oracle',10,'.') rpad from dual;
+
+RPAD                                                                            
+----------                                                                      
+Oracle....                                                                      
+
+SQL> 
+SQL> 
+SQL> 
+SQL> select ltrim('hello','he')trim1, ltrim('hello','o')trim2 from dual;
+
+TRI TRIM2                                                                       
+--- -----                                                                       
+llo hello                                                                       
+
+SQL> 
+SQL> 
+SQL> select rtrim('hello','he') as trim1, rtrim('hello','o') as trim2 from dual;
+
+TRIM1 TRIM                                                                      
+----- ----                                                                      
+hello hell                                                                      
+
+SQL> select trim('     Hello     ') trim1 from dual;
+
+TRIM1                                                                           
+-----                                                                           
+Hello                                                                           
+
+SQL> 
+SQL> 
+SQL> select replace('Mango','M','Dj') from dual;
+
+REPLAC                                                                          
+------                                                                          
+Django                                                                          
+
+SQL> 
+SQL> 
+SQL> 
+SQL> select abs(-456) "ABS" from dual;
+
+       ABS                                                                      
+----------                                                                      
+       456                                                                      
+
+SQL> select acos(.38)"Arc_Cosine" from dual;
+
+Arc_Cosine                                                                      
+----------                                                                      
+1.18100003                                                                                                                
+
+SQL> select atan(.9)"Arc_Tan" from dual;
+
+   Arc_Tan                                                                      
+----------                                                                      
+.732815102                                                                      
+
+SQL> select asin(.4)"Arc_Sine" from dual;
+
+  Arc_Sine                                                                      
+----------                                                                      
+.411516846                                                                      
+
+SQL> select ceil(45.5) from dual;
+
+CEIL(45.5)                                                                      
+----------                                                                      
+        46                                                                      
+
+SQL> select floor(45.5) from dual;
+
+FLOOR(45.5)                                                                     
+-----------                                                                     
+         45                                                                     
+
+SQL> select mod(40, 9) from dual;
+
+ MOD(40,9)                                                                      
+----------                                                                      
+         4                                                                      
+
+SQL> select power(2,10) from dual;
+
+POWER(2,10)                                                                     
+-----------                                                                     
+       1024                                                                     
+
+SQL> select round(45.88931183,2) "Round" from dual;
+
+     Round                                                                      
+----------                                                                      
+     45.89                                                                      
+
+SQL> select trunc(18.789, 1) from dual;
+
+TRUNC(18.789,1)                                                                 
+---------------                                                                 
+           18.7                                                                 
+
+SQL> select trunc(18.789, -1) from dual;
+
+TRUNC(18.789,-1)                                                                
+----------------                                                                
+              10                                                                
+
+SQL> select trunc(26.253, -1) from dual;
+
+TRUNC(26.253,-1)                                                                
+----------------                                                                
+              20                                                                
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> select sysdate, add_months(sysdate,4), add_months(sysdate,-7) from dual;
+
+SYSDATE   ADD_MONTH ADD_MONTH                                                   
+--------- --------- ---------                                                   
+09-FEB-22 09-JUN-22 09-JUL-21                                                   
+
+SQL> 
+SQL> 
+SQL> select sysdate, extract(year from sysdate)YEAR, extract(day from sysdate)DAY, extract(timezone_hour from systimestamp)TZH from dual;
+
+SYSDATE         YEAR        DAY        TZH                                      
+--------- ---------- ---------- ----------                                      
+09-FEB-22       2022          9          0                                      
+
+SQL> 
+SQL> 
+SQL> select sysdate, last_day(sysdate)END_OF_MONTH from dual;
+
+SYSDATE   END_OF_MO                                                             
+--------- ---------                                                             
+09-FEB-22 28-FEB-22                                                             
+
+SQL> 
+SQL> 
+SQL> select next_day('28-Feb-22','WED') "FIRST WEDNESDAY OF MARCH" from dual;
+
+FIRST WED                                                                       
+---------                                                                       
+02-MAR-22                                                                       
+
+SQL> 
+SQL> 
+SQL> select sysdate, round(sysdate,'MM'),round(sysdate,'YYYY') from dual;
+
+SYSDATE   ROUND(SYS ROUND(SYS                                                   
+--------- --------- ---------                                                   
+09-FEB-22 01-FEB-22 01-JAN-22                                                   
+
+SQL> select sysdate, trunc(sysdate,'MM'), trunc(sysdate,'YYYY') from dual;
+
+SYSDATE   TRUNC(SYS TRUNC(SYS                                                   
+--------- --------- ---------                                                   
+09-FEB-22 01-FEB-22 01-JAN-22                                                   
+
+SQL> 
+SQL> 
+SQL> select months_between('09-Feb-22', '25-May-28') "No of months" from dual;
+
+No of months                                                                    
+------------                                                                    
+  -75.516129                                                                    
+
+SQL> select months_between('09-Feb-22', '25-May-22') "No of months" from dual;
+
+No of months                                                                    
+------------                                                                    
+   -3.516129                                                                    
+
+SQL> select months_between('25-May-22', '09-Feb-22') "No of months" from dual;
+
+No of months                                                                    
+------------                                                                    
+  3.51612903                                                                    
+
+SQL> 
+SQL> 
+SQL> spool off

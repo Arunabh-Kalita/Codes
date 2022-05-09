@@ -1,0 +1,79 @@
+SQL> select * from student;
+
+       REG NAME            DOB            MARKS                                 
+---------- --------------- --------- ----------                                 
+       100 Abhay           25-NOV-01         90                                 
+       102 Ajay            20-FEB-00         97                                 
+       103 Rishi           02-AUG-99         66                                 
+       104 Bishal          09-DEC-02         83                                 
+       105 Bhargav         19-MAY-01         83                                 
+
+SQL> create table course(cid number, reg number);
+
+Table created.
+
+SQL> insert into course values(1, 100);
+
+1 row created.
+
+SQL> insert into course values(2, 103);
+
+1 row created.
+
+SQL> insert into course values(2, 105);
+
+1 row created.
+
+SQL> select * from course;
+
+       CID        REG                                                           
+---------- ----------                                                           
+         1        100                                                           
+         2        103                                                           
+         2        105                                                           
+
+SQL> select student.reg, student.name, course.cid from student inner join course on student.reg=course.reg;
+
+       REG NAME                   CID                                           
+---------- --------------- ----------                                           
+       100 Abhay                    1                                           
+       103 Rishi                    2                                           
+       105 Bhargav                  2                                           
+
+SQL> select student.reg, student.name, course.cid from student left join course on student.reg=course.reg;
+
+       REG NAME                   CID                                           
+---------- --------------- ----------                                           
+       100 Abhay                    1                                           
+       103 Rishi                    2                                           
+       105 Bhargav                  2                                           
+       104 Bishal                                                               
+       102 Ajay                                                                 
+
+SQL> insert into course values(3, 106);
+
+1 row created.
+
+SQL> select student.reg, student.name, course.cid from student right join course on student.reg=course.reg;
+
+       REG NAME                   CID                                           
+---------- --------------- ----------                                           
+       100 Abhay                    1                                           
+       103 Rishi                    2                                           
+       105 Bhargav                  2                                           
+                                    3                                           
+
+SQL> select student.reg, student.name, course.cid from student full join course on student.reg=course.reg;
+
+       REG NAME                   CID                                           
+---------- --------------- ----------                                           
+       100 Abhay                    1                                           
+       102 Ajay                                                                 
+       103 Rishi                    2                                           
+       104 Bishal                                                               
+       105 Bhargav                  2                                           
+                                    3                                           
+
+6 rows selected.
+
+SQL> spool off;

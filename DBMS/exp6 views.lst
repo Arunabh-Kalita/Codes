@@ -1,0 +1,90 @@
+SQL> select * from student;
+
+       REG NAME            DOB            MARKS                                 
+---------- --------------- --------- ----------                                 
+       100 Abhay           25-NOV-01         90                                 
+       102 Ajay            20-FEB-00         97                                 
+       103 Rishi           02-AUG-99         66                                 
+       104 Bishal          09-DEC-02         83                                 
+       105 Akansha         19-MAY-01         83                                 
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG                                       NOT NULL NUMBER
+ NAME                                               VARCHAR2(15)
+ DOB                                                DATE
+ MARKS                                              NUMBER
+
+SQL> create view stuview as select reg, name from student;
+
+View created.
+
+SQL> desc stuview;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG                                       NOT NULL NUMBER
+ NAME                                               VARCHAR2(15)
+
+SQL> 
+SQL> 
+SQL> select * from stuview;
+
+       REG NAME                                                                 
+---------- ---------------                                                      
+       100 Abhay                                                                
+       102 Ajay                                                                 
+       103 Rishi                                                                
+       104 Bishal                                                               
+       105 Akansha                                                              
+
+SQL> insert into stuview values(106, 'Arjit');
+
+1 row created.
+
+SQL> select * from stuview;
+
+       REG NAME                                                                 
+---------- ---------------                                                      
+       100 Abhay                                                                
+       102 Ajay                                                                 
+       103 Rishi                                                                
+       104 Bishal                                                               
+       105 Akansha                                                              
+       106 Arjit                                                                
+
+6 rows selected.
+
+SQL> delete from stuview where reg=106;
+
+1 row deleted.
+
+SQL> select * from stuview;
+
+       REG NAME                                                                 
+---------- ---------------                                                      
+       100 Abhay                                                                
+       102 Ajay                                                                 
+       103 Rishi                                                                
+       104 Bishal                                                               
+       105 Akansha                                                              
+
+SQL> update stuview set name='Bhargav' where reg=105;
+
+1 row updated.
+
+SQL> select * from stuview;
+
+       REG NAME                                                                 
+---------- ---------------                                                      
+       100 Abhay                                                                
+       102 Ajay                                                                 
+       103 Rishi                                                                
+       104 Bishal                                                               
+       105 Bhargav                                                              
+
+SQL> drop view stuview;
+
+View dropped.
+
+SQL> spool off

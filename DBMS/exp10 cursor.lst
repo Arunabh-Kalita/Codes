@@ -1,0 +1,43 @@
+SQL> declare
+  2  cursor c1 is
+  3  select id, name, age, address, salary from employee;
+  4  emp_id number;
+  5  emp_name varchar(10);
+  6  emp_age number;
+  7  emp_address varchar(20);
+  8  emp_salary number;
+  9  begin
+ 10  open c1;
+ 11  loop
+ 12  fetch c1 into emp_id, emp_name, emp_age, emp_address, emp_salary;
+ 13  exit when c1%notfound;
+ 14  dbms_output.put_line(emp_id || ' ' || emp_name || ' ' || emp_age || ' ' || emp_address || ' ' || emp_salary);
+ 15  end loop;
+ 16  close c1;
+ 17  end;
+ 18  /
+1 John 20 US 2000                                                               
+2 Stephan 26 Dubai 1500                                                         
+3 David 27 Bangkok 2000                                                         
+4 Alina 29 UK 6500                                                              
+5 Kathrin 34 Bangalore 8500                                                     
+6 Harry 42 China 4500                                                           
+7 Jackson 25 Mizoram 10000                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from employee;
+
+        ID NAME              AGE ADDRESS        SALARY                          
+---------- ---------- ---------- ---------- ----------                          
+         1 John               20 US               2000                          
+         2 Stephan            26 Dubai            1500                          
+         3 David              27 Bangkok          2000                          
+         4 Alina              29 UK               6500                          
+         5 Kathrin            34 Bangalore        8500                          
+         6 Harry              42 China            4500                          
+         7 Jackson            25 Mizoram         10000                          
+
+7 rows selected.
+
+SQL> spool off;

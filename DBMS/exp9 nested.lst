@@ -1,0 +1,116 @@
+SQL> create table employee(id number, name varchar(10), age number, address varchar(10), salary number);
+
+Table created.
+
+SQL> insert into employee values(1,'John', 20, 'US', 2000.00);
+
+1 row created.
+
+SQL> insert into employee values(2,'Stephan', 26, 'Dubai', 1500.00);
+
+1 row created.
+
+SQL> insert into employee values(3,'David', 27, 'Bangkok', 2000.00);
+
+1 row created.
+
+SQL> insert into employee values(4,'Alina', 29, 'UK', 6500.00);
+
+1 row created.
+
+SQL> insert into employee values(5,'Kathrin', 34, 'Bangalore', 8500.00);
+
+1 row created.
+
+SQL> insert into employee values(6,'Harry', 42, 'China', 4500.00);
+
+1 row created.
+
+SQL> insert into employee values(7,'Jackson', 25, 'Mizoram', 10000.00);
+
+1 row created.
+
+SQL> select * from employee;
+
+        ID NAME              AGE ADDRESS        SALARY                          
+---------- ---------- ---------- ---------- ----------                          
+         1 John               20 US               2000                          
+         2 Stephan            26 Dubai            1500                          
+         3 David              27 Bangkok          2000                          
+         4 Alina              29 UK               6500                          
+         5 Kathrin            34 Bangalore        8500                          
+         6 Harry              42 China            4500                          
+         7 Jackson            25 Mizoram         10000                          
+
+7 rows selected.
+
+SQL> select * from employee where id in (select id from employee where salary>4500);
+
+        ID NAME              AGE ADDRESS        SALARY                          
+---------- ---------- ---------- ---------- ----------                          
+         4 Alina              29 UK               6500                          
+         5 Kathrin            34 Bangalore        8500                          
+         7 Jackson            25 Mizoram         10000                          
+
+SQL> create table employee_bkp(id number, name varchar(10), age number, address varchar(10), salary number);
+
+Table created.
+
+SQL> insert into employee_bkp select * from employee where id in (select id from employee);
+
+7 rows created.
+
+SQL> select * from employee_bkp;
+
+        ID NAME              AGE ADDRESS        SALARY                          
+---------- ---------- ---------- ---------- ----------                          
+         1 John               20 US               2000                          
+         2 Stephan            26 Dubai            1500                          
+         3 David              27 Bangkok          2000                          
+         4 Alina              29 UK               6500                          
+         5 Kathrin            34 Bangalore        8500                          
+         6 Harry              42 China            4500                          
+         7 Jackson            25 Mizoram         10000                          
+
+7 rows selected.
+
+SQL> update employee set salary = salary*0.25 where age in (select age from employee_bkp where age>=29);
+
+3 rows updated.
+
+SQL> select * from employee;
+
+        ID NAME              AGE ADDRESS        SALARY                          
+---------- ---------- ---------- ---------- ----------                          
+         1 John               20 US               2000                          
+         2 Stephan            26 Dubai            1500                          
+         3 David              27 Bangkok          2000                          
+         4 Alina              29 UK               1625                          
+         5 Kathrin            34 Bangalore        2125                          
+         6 Harry              42 China            1125                          
+         7 Jackson            25 Mizoram         10000                          
+
+7 rows selected.
+
+SQL> delete from employee where age in (select age from employee_bkp where age>=29);
+
+3 rows deleted.
+
+SQL> select * from employee;
+
+        ID NAME              AGE ADDRESS        SALARY                          
+---------- ---------- ---------- ---------- ----------                          
+         1 John               20 US               2000                          
+         2 Stephan            26 Dubai            1500                          
+         3 David              27 Bangkok          2000                          
+         7 Jackson            25 Mizoram         10000                          
+
+SQL> select * from employee_bkp where id not in (select id from employee);
+
+        ID NAME              AGE ADDRESS        SALARY                          
+---------- ---------- ---------- ---------- ----------                          
+         6 Harry              42 China            4500                          
+         4 Alina              29 UK               6500                          
+         5 Kathrin            34 Bangalore        8500                          
+
+SQL> spool off;

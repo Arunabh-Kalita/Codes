@@ -1,0 +1,25 @@
+SQL> set serveroutput on;
+SQL> declare
+  2  a number;
+  3  b number;
+  4  c number;
+  5  procedure findMax(x in number, y in number, z out number) is
+  6  begin
+  7  if x > y then
+  8  z:=x;
+  9  else
+ 10  z:=y;
+ 11  end if;
+ 12  end;
+ 13  begin
+ 14  a:=154;
+ 15  b:=145;
+ 16  findMax(a,b,c);
+ 17  dbms_output.put_line('Maximum of (154, 145) : ' || c);
+ 18  end;
+ 19  /
+Maximum of (154, 145) : 154                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

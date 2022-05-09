@@ -1,0 +1,36 @@
+SQL> select * from employee;
+
+        ID NAME              AGE ADDRESS        SALARY                          
+---------- ---------- ---------- ---------- ----------                          
+         1 John               20 US               2000                          
+         2 Stephan            26 Dubai            1500                          
+         3 David              27 Bangkok          2000                          
+         4 Alina              29 UK               6500                          
+         5 Kathrin            34 Bangalore        8500                          
+         6 Harry              42 China            4500                          
+         7 Jackson            25 Mizoram         10000                          
+
+7 rows selected.
+
+SQL> declare
+  2  e_id employee.id%type:=8;
+  3  e_name employee.name%type;
+  4  e_addr employee.address%type;
+  5  begin
+  6  select name, address into e_name, e_addr
+  7  from employee
+  8  where id = e_id;
+  9  dbms_output.put_line('Name:' || e_name);
+ 10  dbms_output.put_line('Address:' || e_addr);
+ 11  exception
+ 12  when no_data_found then
+ 13  dbms_output.put_line('No such employee');
+ 14  when others then
+ 15  dbms_output.put_line('Error');
+ 16  end;
+ 17  /
+No such employee                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

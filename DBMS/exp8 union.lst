@@ -1,0 +1,115 @@
+SQL> create table speakers(name varchar(25));
+
+Table created.
+
+SQL> create table authors(name varchar(25));
+
+Table created.
+
+SQL> insert into speakers values('Sachin');
+
+1 row created.
+
+SQL> insert into speakers values('Rahul');
+
+1 row created.
+
+SQL> insert into speakers values('Arunabh');
+
+1 row created.
+
+SQL> insert into speakers values('Arindom');
+
+1 row created.
+
+SQL> insert into authors values('Sachin');
+
+1 row created.
+
+SQL> insert into authors ('Rahul');
+insert into authors ('Rahul')
+                     *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into authors values ('Rahul');
+
+1 row created.
+
+SQL> insert into authors values ('Pratik');
+
+1 row created.
+
+SQL> insert into authors values ('Rajesh');
+
+1 row created.
+
+SQL> insert into authors values ('Anil');
+
+1 row created.
+
+SQL> select * from speakers;
+
+NAME                                                                            
+-------------------------                                                       
+Sachin                                                                          
+Rahul                                                                           
+Arunabh                                                                         
+Arindom                                                                         
+
+SQL> select * from authors;
+
+NAME                                                                            
+-------------------------                                                       
+Sachin                                                                          
+Rahul                                                                           
+Pratik                                                                          
+Rajesh                                                                          
+Anil                                                                            
+
+SQL> select name from speakers union select name from authors order by name;
+
+NAME                                                                            
+-------------------------                                                       
+Anil                                                                            
+Arindom                                                                         
+Arunabh                                                                         
+Pratik                                                                          
+Rahul                                                                           
+Rajesh                                                                          
+Sachin                                                                          
+
+7 rows selected.
+
+SQL> select name from speakers union all select name from authors order by name;
+
+NAME                                                                            
+-------------------------                                                       
+Anil                                                                            
+Arindom                                                                         
+Arunabh                                                                         
+Pratik                                                                          
+Rahul                                                                           
+Rahul                                                                           
+Rajesh                                                                          
+Sachin                                                                          
+Sachin                                                                          
+
+9 rows selected.
+
+SQL> select name from speakers intersect select name from authors order by name;
+
+NAME                                                                            
+-------------------------                                                       
+Rahul                                                                           
+Sachin                                                                          
+
+SQL> select name from speakers minus select name from authors order by name;
+
+NAME                                                                            
+-------------------------                                                       
+Arindom                                                                         
+Arunabh                                                                         
+
+SQL> spool off

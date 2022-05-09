@@ -1,0 +1,97 @@
+SQL> drop table student;
+
+Table dropped.
+
+SQL> create table student(reg number primary key, name varchar(15), dob date, marks number);
+
+Table created.
+
+SQL> insert into student values(100, 'Abhay', date '2001-11-25', 90);
+
+1 row created.
+
+SQL> insert into student values(102, 'Ajay', date '2000-02-20', 97);
+
+1 row created.
+
+SQL> insert into student values(103, 'Rishi', date '1999-08-02', 66);
+
+1 row created.
+
+SQL> insert into student values(104, 'Bishal', date '2002-12-09', 83);
+
+1 row created.
+
+SQL> select * from student;
+
+       REG NAME            DOB            MARKS                                 
+---------- --------------- --------- ----------                                 
+       100 Abhay           25-NOV-01         90                                 
+       102 Ajay            20-FEB-00         97                                 
+       103 Rishi           02-AUG-99         66                                 
+       104 Bishal          09-DEC-02         83                                 
+
+SQL> ALTER TABLE student MODIFY name varchar(15) NOT NULL;
+
+Table altered.
+
+SQL> ALTER TABLE student ADD dept varchar2(10);
+
+Table altered.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG                                       NOT NULL NUMBER
+ NAME                                      NOT NULL VARCHAR2(15)
+ DOB                                                DATE
+ MARKS                                              NUMBER
+ DEPT                                               VARCHAR2(10)
+
+SQL> ALTER TABLE student MODIFY (name varchar2(20));
+
+Table altered.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG                                       NOT NULL NUMBER
+ NAME                                      NOT NULL VARCHAR2(20)
+ DOB                                                DATE
+ MARKS                                              NUMBER
+ DEPT                                               VARCHAR2(10)
+
+SQL> ALTER TABLE student RENAME TO STUDENT;
+ALTER TABLE student RENAME TO STUDENT
+                              *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> ALTER TABLE student RENAME TO STUDENT_OF_SRM;
+
+Table altered.
+
+SQL> SELECT * FROM STUDENT_OF_SRM;
+
+       REG NAME                 DOB            MARKS DEPT                       
+---------- -------------------- --------- ---------- ----------                 
+       100 Abhay                25-NOV-01         90                            
+       102 Ajay                 20-FEB-00         97                            
+       103 Rishi                02-AUG-99         66                            
+       104 Bishal               09-DEC-02         83                            
+
+SQL> ALTER TABLE STUDENT_OF_SRM ADD CHECK (MARKS>=50);
+
+Table altered.
+
+SQL> DESC STUDENT_OF_SRM;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REG                                       NOT NULL NUMBER
+ NAME                                      NOT NULL VARCHAR2(20)
+ DOB                                                DATE
+ MARKS                                              NUMBER
+ DEPT                                               VARCHAR2(10)
+
+SQL> spool off
