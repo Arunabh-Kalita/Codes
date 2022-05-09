@@ -1,0 +1,31 @@
+TRIGGER
+
+syntax:
+
+create [or replace] trigger trigger_name
+before/after insert/update/delete
+
+on table_name [for each row]
+declare
+--variable declarations
+begin
+--trigger code
+exception when...
+--exception handling;
+end;
+
+
+
+
+create or replace trigger checkdeptno
+before insert on department for each row
+declare
+    rowcount int;
+begin
+    select count(*) into rowcount from department where deptNo = :NEW.deptNo;
+    if rowcount<>0 then
+        raise_application_error(-20001,'Department already exists');
+    end if;
+end;
+
+insert into department values(2, 'EEE');

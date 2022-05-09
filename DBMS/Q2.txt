@@ -1,0 +1,24 @@
+EXPLICIT EXCEPTION HANDLING
+
+declare
+    dept department.deptNo%type;
+    name department.deptName%type;
+    ex_invalid_deptNo exception;
+    someval number;
+begin
+    someVal:=5;
+    dept := someVal;
+    if dept<=0 then
+        raise ex_invalid_deptNo;
+    else
+        select deptName into name from department where deptNo = dept;
+        dbms_output.put_line('Department: '|| name);
+    end if;
+exception
+    when ex_invalid_deptNo then
+        dbms_output.put_line('Department number must be greater than zero!');
+    when no_data_found then
+        dbms_output.put_line('No such department');
+    when others then
+        dbms_output.put_line('Error');
+end;
